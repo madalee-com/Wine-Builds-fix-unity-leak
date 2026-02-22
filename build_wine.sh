@@ -298,6 +298,9 @@ if [ ! -d wine ]; then
 	exit 1
 fi
 
+# Revert some code in signal_x86_64.c that causes memory leaks in some games.
+cp ./signal_x86_64.c ./wine/dlls/ntdll/signal_x86_64.c
+
 cd wine || exit 1
 dlls/winevulkan/make_vulkan
 tools/make_requests
