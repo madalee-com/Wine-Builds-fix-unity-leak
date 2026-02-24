@@ -1,8 +1,6 @@
 name: Wine Git CI
 
 on:
-  schedule:
-    - cron:  '0 0 */3 * *'
   workflow_dispatch:
 
 jobs:
@@ -26,7 +24,7 @@ jobs:
           chmod +x build_wine.sh
           export WINE_VERSION="git"
           WINE_BRANCH=vanilla ./build_wine.sh
-          WINE_BRANCH=staging ./build_wine.sh
+          # WINE_BRANCH=staging ./build_wine.sh
           sha256sum *.tar.xz
       - uses: actions/upload-artifact@v4
         with:

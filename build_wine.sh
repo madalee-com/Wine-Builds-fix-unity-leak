@@ -299,7 +299,11 @@ if [ ! -d wine ]; then
 fi
 
 # Revert some code in signal_x86_64.c that causes memory leaks in some games.
-cp ./signal_x86_64.c ./wine/dlls/ntdll/unix/signal_x86_64.c
+if [ "$WINE_BRANCH" = "proton" ]; then
+	cp ./signal_x86_64.c ./wine/dlls/ntdll/unix/signal_x86_64.c
+else
+	cp ./signal_x86_64_wine_master_patched.c ./wine/dlls/ntdll/unix/signal_x86_64.c
+fi
 
 cd wine || exit 1
 dlls/winevulkan/make_vulkan
